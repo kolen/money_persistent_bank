@@ -17,9 +17,10 @@ class Money
       end
 
       def import_rates
-        rates.clear
         cache = storage.read(@storage_key)
-        super(@storage_format, cache) if cache
+        return unless cache
+        rates.clear
+        super(@storage_format, cache)
       end
 
       def clear

@@ -1,1 +1,1 @@
-require "money_persistent_bank/railtie"
+require 'money/bank/persistent_bank'

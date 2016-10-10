@@ -5,11 +5,13 @@ class Money
     class PersistentBank < VariableExchange
       attr_reader :storage
 
-      def initialize storage, key = 'persistent_bank/rates', format = :yaml
+      def initialize(storage, key = 'persistent_bank/rates', format = :yaml,
+                     always_sync = false)
         super()
         @storage = storage
         @storage_key = key
         @storage_format = format
+        @always_sync = always_sync
       end
 
       def export_rates
@@ -28,7 +30,7 @@ class Money
       end
 
       def exchange_with(from, to_currency, &block)
-        import_rates unless @rates_imported
+        import_rates if !@rates_imported || @always_sync
         super(from, to_currency, &block)
       end
     end

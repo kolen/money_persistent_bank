@@ -29,7 +29,7 @@ class Money
 
       def exchange_with(from, to_currency, &block)
         import_rates unless @rates_imported
-        super(from, to_currency, block)
+        super(from, to_currency, &block)
       end
     end
   end
